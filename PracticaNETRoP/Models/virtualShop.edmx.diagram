@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="560f4135aebc4c58b77db1d51da4866d" Name="Diagram1">
+        <EntityTypeShape EntityType="VirtualShopModel.Invoices" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirtualShopModel.Products" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="VirtualShopModel.FK_Stock_Products" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="0.75" PointY="1.125" />
+        <AssociationConnector Association="VirtualShopModel.ProductOrder" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
