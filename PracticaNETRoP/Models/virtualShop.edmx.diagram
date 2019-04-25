@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="560f4135aebc4c58b77db1d51da4866d" Name="Diagram1">
-        <EntityTypeShape EntityType="VirtualShopModel.Invoices" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="VirtualShopModel.Products" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="VirtualShopModel.FK_Stock_Products" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="VirtualShopModel.Invoices" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="0.75" PointY="1.125" />
         <AssociationConnector Association="VirtualShopModel.ProductOrder" />
         </Diagram>
     </edmx:Diagrams>
