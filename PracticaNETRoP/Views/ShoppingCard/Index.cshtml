@@ -9,20 +9,24 @@
         </th>
         <th></th>
     </tr>
-    @foreach (var item in Model)
+    @if (Model != null)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
     }
+
 </table>
-<h1>Total: </h1> @Model.Sum(i => i.price) €
+<h1>Total: </h1> @if (Model != null) { Model.Sum(i => i.price); } €
 @Html.ActionLink("Buy now", "CreateOrder")

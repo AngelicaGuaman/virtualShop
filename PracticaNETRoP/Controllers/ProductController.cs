@@ -10,7 +10,7 @@ using PracticaNETRoP.Models;
 
 namespace PracticaNETRoP.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductController : Controller
     {
         private VirtualShopEntities db = new VirtualShopEntities();
 

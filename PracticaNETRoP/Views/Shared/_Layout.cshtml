@@ -25,7 +25,15 @@
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Products")</li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Product")</li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
+                        @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
+                        @{ List<PracticaNETRoP.Models.Products> carrito = (List<PracticaNETRoP.Models.Products>)HttpContext.Current.Session["KEY"];}
+                        @if (carrito != null)
+                        {
+                            <p>(@carrito.Count())</p>
+                        }
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
