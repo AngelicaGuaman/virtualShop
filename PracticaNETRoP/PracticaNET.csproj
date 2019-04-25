@@ -247,6 +247,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\background.png" />
+    <Content Include="Content\img\eyeShadowPrimer.jpg" />
+    <Content Include="Content\img\Hi-Fi-Gloss.jpg" />
+    <Content Include="Content\img\nakedCherry.jpg" />
+    <Content Include="Content\img\noProduct.jpg" />
+    <Content Include="Content\img\ruborUrbanDecay.jpg" />
     <Content Include="Content\img\upmlogo.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
