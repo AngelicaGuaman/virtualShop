@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="VirtualShopModel.Products" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="VirtualShopModel.FK_Stock_Products" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="VirtualShopModel.ProductOrder" />
         </Diagram>
     </edmx:Diagrams>

@@ -23,6 +23,7 @@ namespace PracticaNETRoP.Models
         public int Id { get; set; }
         public int units { get; set; }
         public int idClient { get; set; }
+        public System.DateTime dateCreation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }

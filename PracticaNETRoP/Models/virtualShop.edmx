@@ -10,9 +10,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="dateInvoice" Type="date" Nullable="false" />
+          <Property Name="dateInvoice" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -20,7 +20,8 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="units" Type="int" Nullable="false" />
-          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="idClient" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="dateCreation" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductOrder">
           <Key>
@@ -113,7 +114,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="dateInvoice" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateInvoice" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="idClient" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
@@ -171,6 +172,7 @@
           <Property Name="units" Type="Int32" Nullable="false" />
           <Property Name="idClient" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="VirtualShopModel.ProductOrder" FromRole="Orders" ToRole="Products" />
+          <Property Name="dateCreation" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="ProductOrder">
           <End Type="VirtualShopModel.Orders" Role="Orders" Multiplicity="*" />
@@ -215,6 +217,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="VirtualShopModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
                 <ScalarProperty Name="idClient" ColumnName="idClient" />
                 <ScalarProperty Name="units" ColumnName="units" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

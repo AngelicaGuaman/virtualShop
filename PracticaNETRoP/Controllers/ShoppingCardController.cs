@@ -2,6 +2,7 @@
 using PracticaNETRoP.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -36,9 +37,24 @@ namespace PracticaNETRoP.Controllers
 
         public ActionResult CreateOrder(ShoppingCard sc)
         {
-            string email = User.Identity.GetUserName();
+            Orders order = new Orders();
 
-         
+            foreach(Products product in sc)
+            {
+                Products productDb = db.Products.Find(product.Id);
+                order.Products.Add(productDb);
+                productDb.units--;
+                db.Entry(productDb).State = EntityState.Modified;
+            }
+
+            order.dateCreation = DateTime.Now;
+            string userId = User.Identity.GetUserId();
+            order.idClient = userId;
+
+            db.Orders.Add(order);
+            db.SaveChanges();
+            sc.Clear();
+
             return RedirectToAction("OrderCreated");
         }
     }
