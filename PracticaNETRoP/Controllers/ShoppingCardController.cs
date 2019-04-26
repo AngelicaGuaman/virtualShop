@@ -13,6 +13,7 @@ namespace PracticaNETRoP.Controllers
     public class ShoppingCardController : Controller
     {
         private VirtualShopEntities db = new VirtualShopEntities();
+        private const int PRODUCT_WITHOUT_STOCK = 2;
 
         // GET: ShoppingCard
         public ActionResult Index(ShoppingCard sc)
@@ -38,18 +39,35 @@ namespace PracticaNETRoP.Controllers
         public ActionResult CreateOrder(ShoppingCard sc)
         {
             Orders order = new Orders();
-
+            decimal amount = 0;
             foreach (Products product in sc)
             {
                 Products productDb = db.Products.Find(product.Id);
                 order.Products.Add(productDb);
+                amount = amount + productDb.price;
                 productDb.stock--;
+
+                if (productDb.stock == PRODUCT_WITHOUT_STOCK)
+                {
+                    Stock stockDb = new Stock();
+                    stockDb.idProduct = productDb.Id;
+                    stockDb.units = productDb.stock;
+                    // TODO ver el tipo de datos de la imagen
+                    // productDb.image = "img/noProduct.jpg";
+                    productDb.Stock1.Add(stockDb);
+                }
+
                 db.Entry(productDb).State = EntityState.Modified;
             }
 
             order.dateCreation = DateTime.Now;
             string userId = User.Identity.GetUserId();
             order.idClient = userId;
+
+            //TODO relación entre pedido y factura con esto ya sacamos al cliente
+            Invoices invoice = new Invoices();
+            invoice.dateInvoice = DateTime.Now;
+            invoice.amount = amount;
 
             db.Orders.Add(order);
             db.SaveChanges();

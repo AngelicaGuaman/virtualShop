@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ namespace PracticaNETRoP.Controllers
     public class ProductController : Controller
     {
         private VirtualShopEntities db = new VirtualShopEntities();
+        private const int PRODUCT_WITHOUT_STOCK = 2;
 
         // GET: Products
         public ActionResult Index()
@@ -70,7 +72,7 @@ namespace PracticaNETRoP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name,description,price,units,image")] Products products)
+        public ActionResult Create([Bind(Include = "Id,name,description,price,stock,image")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -102,10 +104,15 @@ namespace PracticaNETRoP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,name,description,price,units,image")] Products products)
+        public ActionResult Edit([Bind(Include = "Id,name,description,price,stock,image")] Products products)
         {
             if (ModelState.IsValid)
             {
+                if(products.Stock1 != null && products.stock > PRODUCT_WITHOUT_STOCK)
+                {
+                   
+                  
+                }
                 db.Entry(products).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
