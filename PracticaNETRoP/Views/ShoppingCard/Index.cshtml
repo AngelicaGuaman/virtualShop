@@ -2,7 +2,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.description)
+            @Html.DisplayNameFor(model => model.name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.price)
@@ -15,7 +15,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.description)
+                    @Html.DisplayFor(modelItem => item.name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.price)
@@ -28,5 +28,7 @@
     }
 
 </table>
-<h1>Total: </h1> @if (Model != null) { Model.Sum(i => i.price); } €
+<h1>
+    Total: @if (Model != null) { Model.Sum(i => i.price); } €
+</h1> 
 @Html.ActionLink("Buy now", "CreateOrder")

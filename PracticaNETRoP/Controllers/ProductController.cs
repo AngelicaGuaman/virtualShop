@@ -70,7 +70,7 @@ namespace PracticaNETRoP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,price,units,image,description")] Products products)
+        public ActionResult Create([Bind(Include = "Id,name,description,price,units,image")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace PracticaNETRoP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,price,units,image,description")] Products products)
+        public ActionResult Edit([Bind(Include = "Id,name,description,price,units,image")] Products products)
         {
             if (ModelState.IsValid)
             {
