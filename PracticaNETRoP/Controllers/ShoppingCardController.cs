@@ -49,9 +49,12 @@ namespace PracticaNETRoP.Controllers
 
                 if (productDb.stock == PRODUCT_WITHOUT_STOCK)
                 {
-                    Stock stockDb = new Stock();
-                    stockDb.idProduct = productDb.Id;
-                    stockDb.units = productDb.stock;
+                    Stock stockDb = new Stock
+                    {
+                        idProduct = productDb.Id,
+                        units = productDb.stock
+                    };
+
                     // TODO ver el tipo de datos de la imagen
                     // productDb.image = "img/noProduct.jpg";
                     productDb.Stock1.Add(stockDb);
@@ -65,9 +68,11 @@ namespace PracticaNETRoP.Controllers
             order.idClient = userId;
 
             //TODO relación entre pedido y factura con esto ya sacamos al cliente
-            Invoices invoice = new Invoices();
-            invoice.dateInvoice = DateTime.Now;
-            invoice.amount = amount;
+            Invoices invoice = new Invoices
+            {
+                dateInvoice = DateTime.Now,
+                amount = amount
+            };
 
             db.Orders.Add(order);
             db.SaveChanges();

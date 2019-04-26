@@ -76,6 +76,17 @@ namespace PracticaNETRoP.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (products.stock < PRODUCT_WITHOUT_STOCK)
+                {
+                    Stock stock = new Stock
+                    {
+                        idProduct = products.Id,
+                        units = products.stock
+                    };
+
+                    products.Stock1.Add(stock);
+                }
+
                 db.Products.Add(products);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -108,11 +119,26 @@ namespace PracticaNETRoP.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(products.Stock1 != null && products.stock > PRODUCT_WITHOUT_STOCK)
+                if (products.Stock1 != null && products.stock > PRODUCT_WITHOUT_STOCK)
                 {
-                   
-                  
+                    //TODO la relacion debe ser 1 a 1 --> Deuda técnica
+                    foreach (var stock in products.Stock1)
+                    {
+                        products.Stock1.Remove(stock);
+                    }
+
                 }
+                else
+                {
+                    Stock stock = new Stock
+                    {
+                        idProduct = products.Id,
+                        units = products.stock
+                    };
+
+                    products.Stock1.Add(stock);
+                }
+
                 db.Entry(products).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
