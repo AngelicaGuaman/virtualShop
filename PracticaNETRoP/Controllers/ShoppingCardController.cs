@@ -39,11 +39,11 @@ namespace PracticaNETRoP.Controllers
         {
             Orders order = new Orders();
 
-            foreach(Products product in sc)
+            foreach (Products product in sc)
             {
                 Products productDb = db.Products.Find(product.Id);
                 order.Products.Add(productDb);
-                productDb.units--;
+                productDb.stock--;
                 db.Entry(productDb).State = EntityState.Modified;
             }
 

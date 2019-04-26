@@ -17,18 +17,19 @@ namespace PracticaNETRoP.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Products()
         {
-            this.Stock = new HashSet<Stock>();
+            this.Stock1 = new HashSet<Stock>();
             this.Orders = new HashSet<Orders>();
         }
     
         public int Id { get; set; }
-        public decimal price { get; set; }
-        public int units { get; set; }
-        public byte[] image { get; set; }
+        public string name { get; set; }
         public string description { get; set; }
+        public decimal price { get; set; }
+        public int stock { get; set; }
+        public byte[] image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stock> Stock { get; set; }
+        public virtual ICollection<Stock> Stock1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
     }

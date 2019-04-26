@@ -31,7 +31,7 @@ namespace PracticaNETRoP.Controllers
 
             Products product = db.Products.Find(id);
 
-            if (numberOfProducts >= product.units)
+            if (numberOfProducts >= product.stock)
             {
                 TempData["notice_error"] = "No existe suficiente stock para el producto solicitado";
             }

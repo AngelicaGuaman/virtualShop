@@ -36,10 +36,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="price" Type="money" Nullable="false" />
-          <Property Name="units" Type="int" Nullable="false" />
-          <Property Name="image" Type="image" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="description" Type="varchar" MaxLength="200" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="stock" Type="int" Nullable="false" />
+          <Property Name="image" Type="image" Nullable="false" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -108,48 +109,15 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VirtualShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Products">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="units" Type="Int32" Nullable="false" />
-          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Stock" Relationship="Self.FK_Stock_Products" FromRole="Products" ToRole="Stock" />
-          <NavigationProperty Name="Orders" Relationship="VirtualShopModel.ProductOrder" FromRole="Products" ToRole="Orders" />
-          </EntityType>
-        <EntityType Name="Stock">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="idProduct" Type="Int32" Nullable="false" />
-          <Property Name="units" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Stock_Products" FromRole="Stock" ToRole="Products" />
-        </EntityType>
-        <Association Name="FK_Stock_Products">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Stock">
-              <PropertyRef Name="idProduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="VirtualShopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Products" EntityType="Self.Products" />
-          <EntitySet Name="Stock" EntityType="Self.Stock" />
-          <AssociationSet Name="FK_Stock_Products" Association="Self.FK_Stock_Products">
+          <EntitySet Name="Invoices" EntityType="VirtualShopModel.Invoices" />
+          <EntitySet Name="Orders" EntityType="VirtualShopModel.Orders" />
+          <EntitySet Name="Products" EntityType="VirtualShopModel.Products" />
+          <EntitySet Name="Stock" EntityType="VirtualShopModel.Stock" />
+          <AssociationSet Name="FK_Stock_Products" Association="VirtualShopModel.FK_Stock_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
-          <EntitySet Name="Invoices" EntityType="VirtualShopModel.Invoices" />
-          <EntitySet Name="Orders" EntityType="VirtualShopModel.Orders" />
           <AssociationSet Name="ProductOrder" Association="VirtualShopModel.ProductOrder">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Products" EntitySet="Products" />
@@ -174,6 +142,40 @@
           <Property Name="dateCreation" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Products" Relationship="VirtualShopModel.ProductOrder" FromRole="Orders" ToRole="Products" />
         </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Stock1" Relationship="VirtualShopModel.FK_Stock_Products" FromRole="Products" ToRole="Stock" />
+          <NavigationProperty Name="Orders" Relationship="VirtualShopModel.ProductOrder" FromRole="Products" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="units" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="VirtualShopModel.FK_Stock_Products" FromRole="Stock" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_Stock_Products">
+          <End Type="VirtualShopModel.Products" Role="Products" Multiplicity="1" />
+          <End Type="VirtualShopModel.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ProductOrder">
           <End Type="VirtualShopModel.Orders" Role="Orders" Multiplicity="*" />
           <End Type="VirtualShopModel.Products" Role="Products" Multiplicity="*" />
@@ -184,26 +186,6 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="VirtualShopModelStoreContainer" CdmEntityContainer="VirtualShopEntities">
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="IsTypeOf(VirtualShopModel.Products)">
-        <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="units" ColumnName="units" />
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="description" ColumnName="description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Stock">
-      <EntityTypeMapping TypeName="IsTypeOf(VirtualShopModel.Stock)">
-        <MappingFragment StoreEntitySet="Stock">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
-          <ScalarProperty Name="units" ColumnName="units" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="VirtualShopModel.Invoices">
               <MappingFragment StoreEntitySet="Invoices">
@@ -220,6 +202,27 @@
                 <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
                 <ScalarProperty Name="idClient" ColumnName="idClient" />
                 <ScalarProperty Name="units" ColumnName="units" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="VirtualShopModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stock">
+            <EntityTypeMapping TypeName="VirtualShopModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="units" ColumnName="units" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
