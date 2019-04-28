@@ -19,7 +19,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="units" Type="int" Nullable="false" />
           <Property Name="idClient" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="dateCreation" Type="datetime" Nullable="false" />
         </EntityType>
@@ -126,34 +125,23 @@
     <edmx:ConceptualModels>
       <Schema Namespace="VirtualShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="VirtualShopEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Orders" EntityType="VirtualShopModel.Orders" />
           <EntitySet Name="Stock" EntityType="VirtualShopModel.Stock" />
           <EntitySet Name="Products" EntityType="VirtualShopModel.Products" />
           <AssociationSet Name="FK_Stock_Products" Association="VirtualShopModel.FK_Stock_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="Stock" EntitySet="Stock" />
           </AssociationSet>
-          <AssociationSet Name="ProductOrder" Association="VirtualShopModel.ProductOrder">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
           <EntitySet Name="Invoices" EntityType="VirtualShopModel.Invoices" />
+          <EntitySet Name="Orders" EntityType="VirtualShopModel.Orders" />
           <AssociationSet Name="FK_OrderInvoices" Association="VirtualShopModel.FK_OrderInvoices">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Invoices" EntitySet="Invoices" />
           </AssociationSet>
+          <AssociationSet Name="ProductOrder" Association="VirtualShopModel.ProductOrder">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="units" Type="Int32" Nullable="false" />
-          <Property Name="idClient" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="dateCreation" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Products" Relationship="VirtualShopModel.ProductOrder" FromRole="Orders" ToRole="Products" />
-          <NavigationProperty Name="Invoices" Relationship="VirtualShopModel.FK_OrderInvoices" FromRole="Orders" ToRole="Invoices" />
-        </EntityType>
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="Id" />
@@ -188,10 +176,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ProductOrder">
-          <End Type="VirtualShopModel.Orders" Role="Orders" Multiplicity="*" />
-          <End Type="VirtualShopModel.Products" Role="Products" Multiplicity="*" />
-        </Association>
         <EntityType Name="Invoices">
           <Key>
             <PropertyRef Name="Id" />
@@ -201,6 +185,16 @@
           <Property Name="amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="creationDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="VirtualShopModel.FK_OrderInvoices" FromRole="Invoices" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="idClient" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dateCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Invoices" Relationship="VirtualShopModel.FK_OrderInvoices" FromRole="Orders" ToRole="Invoices" />
+          <NavigationProperty Name="Products" Relationship="VirtualShopModel.ProductOrder" FromRole="Orders" ToRole="Products" />
         </EntityType>
         <Association Name="FK_OrderInvoices">
           <End Type="VirtualShopModel.Orders" Role="Orders" Multiplicity="1" />
@@ -214,22 +208,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ProductOrder">
+          <End Type="VirtualShopModel.Orders" Role="Orders" Multiplicity="*" />
+          <End Type="VirtualShopModel.Products" Role="Products" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="VirtualShopModelStoreContainer" CdmEntityContainer="VirtualShopEntities">
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="VirtualShopModel.Orders">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
-                <ScalarProperty Name="idClient" ColumnName="idClient" />
-                <ScalarProperty Name="units" ColumnName="units" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Stock">
             <EntityTypeMapping TypeName="VirtualShopModel.Stock">
               <MappingFragment StoreEntitySet="Stock">
@@ -251,14 +239,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ProductOrder" TypeName="VirtualShopModel.ProductOrder" StoreEntitySet="ProductOrder">
-            <EndProperty Name="Products">
-              <ScalarProperty Name="Id" ColumnName="idProduct" />
-            </EndProperty>
-            <EndProperty Name="Orders">
-              <ScalarProperty Name="Id" ColumnName="idOrder" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Invoices">
             <EntityTypeMapping TypeName="VirtualShopModel.Invoices">
               <MappingFragment StoreEntitySet="Invoices">
@@ -269,6 +249,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="VirtualShopModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="dateCreation" ColumnName="dateCreation" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProductOrder" TypeName="VirtualShopModel.ProductOrder" StoreEntitySet="ProductOrder">
+            <EndProperty Name="Products">
+              <ScalarProperty Name="Id" ColumnName="idProduct" />
+            </EndProperty>
+            <EndProperty Name="Orders">
+              <ScalarProperty Name="Id" ColumnName="idOrder" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
