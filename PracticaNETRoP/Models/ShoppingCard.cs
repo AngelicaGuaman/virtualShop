@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PracticaNETRoP.Controllers
+namespace PracticaNETRoP.Models
 {
     public class ShoppingCard : List<Products>
     {

@@ -26,7 +26,7 @@
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Product")</li>
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
                         @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
-                        @{ List<PracticaNETRoP.Models.Products> shoppingCard = (List<PracticaNETRoP.Models.Products>)HttpContext.Current.Session["KEY"];}
+                        @{ PracticaNETRoP.Models.ShoppingCard shoppingCard = (PracticaNETRoP.Models.ShoppingCard)HttpContext.Current.Session["KEY"];}
                         @if (shoppingCard != null)
                         {
                             <p>(@shoppingCard.Count())</p>

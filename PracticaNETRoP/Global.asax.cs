@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PracticaNETRoP.Models;
+using PracticaNETRoP.Models.Binders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +20,10 @@ namespace PracticaNETRoP
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ModelBinders.Binders.Add(
+                typeof(ShoppingCard),
+                new ShoppingCardBinder());
         }
     }
 }

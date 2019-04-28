@@ -26,6 +26,7 @@ namespace PracticaNETRoP.Controllers
         public ActionResult Add(ShoppingCard sc, int id)
         {
             int numberOfProducts = 0;
+
             foreach (Products art in sc)
             {
                 if (art.Id == id) { numberOfProducts++; }

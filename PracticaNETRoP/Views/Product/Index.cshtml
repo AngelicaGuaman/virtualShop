@@ -7,10 +7,13 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create article", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
@@ -23,9 +26,6 @@
         <th>
             @Html.DisplayNameFor(model => model.stock)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
         <th></th>
     </tr>
 
@@ -34,6 +34,10 @@
         foreach (var item in Model)
         {
             <tr>
+                <td>
+                    <img src="../@Url.Content(item.image)" alt="Image" />
+                    @Html.DisplayFor(modelItem => item.image)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.name)
                 </td>
@@ -47,12 +51,19 @@
                     @Html.DisplayFor(modelItem => item.stock)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.image)
-                </td>
-                <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Detalle", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
+
+                    @if (item.stock > 0)
+                    {
+                        @Html.ActionLink("Añadir al carrito", "Add", new { id = item.Id })
+                    }
+                    else
+                    {
+                        <p>No hay stock</p>
+                    }
+
                 </td>
             </tr>
         }

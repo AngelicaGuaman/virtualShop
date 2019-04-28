@@ -202,7 +202,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\ShoppingCard.cs" />
+    <Compile Include="Models\ShoppingCard.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -211,6 +211,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Binders\ShoppingCardBinder.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoices.cs">
       <DependentUpon>virtualShop.tt</DependentUpon>
