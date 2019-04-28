@@ -21,6 +21,10 @@
     background-size: 100% 100%;
 }
 
+.shopping-card-size{
+    color: white;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,

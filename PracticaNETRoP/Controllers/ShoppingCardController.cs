@@ -67,13 +67,13 @@ namespace PracticaNETRoP.Controllers
             string userId = User.Identity.GetUserId();
             order.idClient = userId;
 
-            //TODO relación entre pedido y factura con esto ya sacamos al cliente
             Invoices invoice = new Invoices
             {
-                dateInvoice = DateTime.Now,
+                creationDate = DateTime.Now,
                 amount = amount
             };
 
+            order.Invoices.Add(invoice);
             db.Orders.Add(order);
             db.SaveChanges();
             sc.Clear();

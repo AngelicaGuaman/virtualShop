@@ -29,7 +29,7 @@
                         @{ PracticaNETRoP.Models.ShoppingCard shoppingCard = (PracticaNETRoP.Models.ShoppingCard)HttpContext.Current.Session["KEY"];}
                         @if (shoppingCard != null)
                         {
-                            <p>(@shoppingCard.Count())</p>
+                            <span class="shopping-card-size">(@shoppingCard.Count())</span>
                         }
                     </li>
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Acerca de", "About", "Home")</li>

@@ -18,6 +18,7 @@ namespace PracticaNETRoP.Models
         public Orders()
         {
             this.Products = new HashSet<Products>();
+            this.Invoices = new HashSet<Invoices>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace PracticaNETRoP.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoices> Invoices { get; set; }
     }
 }
