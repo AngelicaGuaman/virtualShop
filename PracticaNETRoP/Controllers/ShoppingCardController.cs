@@ -61,7 +61,7 @@ namespace PracticaNETRoP.Controllers
                 }
 
                 ProductOrder productOrderDb = db.ProductOrders.Find(order.Id, productDb.Id);
-                order.ProductOrders.
+                
                 if (productOrderDb == null)
                 {
                     ProductOrder productOrder = new ProductOrder
