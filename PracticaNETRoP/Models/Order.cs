@@ -12,22 +12,22 @@ namespace PracticaNETRoP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Orders
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Orders()
+        public Order()
         {
-            this.Invoices = new HashSet<Invoices>();
-            this.Products = new HashSet<Products>();
+            this.Invoices = new HashSet<Invoice>();
+            this.ProductOrders = new HashSet<ProductOrder>();
         }
     
         public int Id { get; set; }
-        public string idClient { get; set; }
-        public System.DateTime dateCreation { get; set; }
+        public string clientId { get; set; }
+        public System.DateTime creationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Invoices> Invoices { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<ProductOrder> ProductOrders { get; set; }
     }
 }

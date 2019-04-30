@@ -25,9 +25,10 @@ namespace PracticaNETRoP.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Stock> Stock { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Invoices> Invoices { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<ProductOrder> ProductOrders { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
     }
 }

@@ -27,20 +27,20 @@ namespace PracticaNETRoP.Controllers
         {
             int numberOfProducts = 0;
 
-            foreach (Products art in sc)
+            foreach (Product art in sc)
             {
                 if (art.Id == id) { numberOfProducts++; }
             }
 
-            Products product = db.Products.Find(id);
-
+            Product product = db.Products.Find(id);
+            
             if (numberOfProducts >= product.stock)
             {
                 TempData["notice_error"] = "No existe suficiente stock para el producto solicitado";
             }
             else
             {
-                sc.Add(db.Products.Find(id));
+                sc.Add(product);
                 TempData["notice_success"] = "Se ha Añadido el artículo al carrito";
             }
 
@@ -54,12 +54,12 @@ namespace PracticaNETRoP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(product);
         }
 
         // GET: Products/Create
@@ -73,27 +73,27 @@ namespace PracticaNETRoP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name,description,price,stock,image")] Products products)
+        public ActionResult Create([Bind(Include = "Id,name,description,price,stock,image")] Product product)
         {
             if (ModelState.IsValid)
             {
-                if (products.stock < PRODUCT_WITHOUT_STOCK)
+                if (product.stock < PRODUCT_WITHOUT_STOCK)
                 {
                     Stock stock = new Stock
                     {
-                        idProduct = products.Id,
-                        units = products.stock
+                        idProduct = product.Id,
+                        units = product.stock
                     };
 
-                    products.Stock1.Add(stock);
+                    product.Stocks.Add(stock);
                 }
 
-                db.Products.Add(products);
+                db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(products);
+            return View(product);
         }
 
         // GET: Products/Edit/5
@@ -103,12 +103,12 @@ namespace PracticaNETRoP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(product);
         }
 
         // POST: Products/Edit/5
@@ -116,16 +116,16 @@ namespace PracticaNETRoP.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,name,description,price,stock,image")] Products products)
+        public ActionResult Edit([Bind(Include = "Id,name,description,price,stock,image")] Product product)
         {
             if (ModelState.IsValid)
             {
-                if (products.Stock1 != null && products.stock > PRODUCT_WITHOUT_STOCK)
+                if (product.Stocks != null && product.stock > PRODUCT_WITHOUT_STOCK)
                 {
                     //TODO la relacion debe ser 1 a 1 --> Deuda técnica
-                    foreach (var stock in products.Stock1)
+                    foreach (var stock in product.Stocks)
                     {
-                        products.Stock1.Remove(stock);
+                        product.Stocks.Remove(stock);
                     }
 
                 }
@@ -133,18 +133,18 @@ namespace PracticaNETRoP.Controllers
                 {
                     Stock stock = new Stock
                     {
-                        idProduct = products.Id,
-                        units = products.stock
+                        idProduct = product.Id,
+                        units = product.stock
                     };
 
-                    products.Stock1.Add(stock);
+                    product.Stocks.Add(stock);
                 }
 
-                db.Entry(products).State = EntityState.Modified;
+                db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(products);
+            return View(product);
         }
 
         // GET: Products/Delete/5
@@ -154,12 +154,12 @@ namespace PracticaNETRoP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+            Product product = db.Products.Find(id);
+            if (product == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(product);
         }
 
         // POST: Products/Delete/5
@@ -167,8 +167,8 @@ namespace PracticaNETRoP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Products products = db.Products.Find(id);
-            db.Products.Remove(products);
+            Product product = db.Products.Find(id);
+            db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

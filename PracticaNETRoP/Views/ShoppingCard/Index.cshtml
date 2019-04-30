@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PracticaNETRoP.Models.Products>
+﻿@model IEnumerable<PracticaNETRoP.Models.Product>
 <table class="table">
     <tr>
         <th>
@@ -31,4 +31,4 @@
 <h1>
     Total: @if (Model != null) { Model.Sum(i => i.price); } €
 </h1> 
-@Html.ActionLink("Buy now", "CreateOrder")
+@Html.ActionLink("Buy now", "OrderCreated")

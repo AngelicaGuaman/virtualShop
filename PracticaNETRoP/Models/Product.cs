@@ -12,13 +12,13 @@ namespace PracticaNETRoP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Products()
+        public Product()
         {
-            this.Stock1 = new HashSet<Stock>();
-            this.Orders = new HashSet<Orders>();
+            this.ProductOrders = new HashSet<ProductOrder>();
+            this.Stocks = new HashSet<Stock>();
         }
     
         public int Id { get; set; }
@@ -29,8 +29,8 @@ namespace PracticaNETRoP.Models
         public string image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stock> Stock1 { get; set; }
+        public virtual ICollection<ProductOrder> ProductOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }

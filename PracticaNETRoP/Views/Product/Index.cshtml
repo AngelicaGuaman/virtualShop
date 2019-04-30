@@ -1,10 +1,10 @@
-﻿@model IEnumerable<PracticaNETRoP.Models.Products>
+﻿@model IEnumerable<PracticaNETRoP.Models.Product>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Productos</h2>
 
 <p>
     @Html.ActionLink("Create article", "Create")
@@ -35,7 +35,7 @@
         {
             <tr>
                 <td>
-                    <img src="../@Url.Content(item.image)" alt="Image" />
+                    <img src=@("../../" + item.image) alt="Image" />
                     @Html.DisplayFor(modelItem => item.image)
                 </td>
                 <td>

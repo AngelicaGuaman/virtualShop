@@ -5,13 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="560f4135aebc4c58b77db1d51da4866d" Name="Diagram1">
-        <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="5.25" PointY="4.25" />
-        <EntityTypeShape EntityType="VirtualShopModel.Products" Width="1.5" PointX="3" PointY="3.875" />
-        <AssociationConnector Association="VirtualShopModel.FK_Stock_Products" />
-        <EntityTypeShape EntityType="VirtualShopModel.Invoices" Width="1.5" PointX="6.25" PointY="0.625" />
-        <EntityTypeShape EntityType="VirtualShopModel.Orders" Width="1.5" PointX="3" PointY="0.625" />
-        <AssociationConnector Association="VirtualShopModel.FK_OrderInvoices" />
-        <AssociationConnector Association="VirtualShopModel.ProductOrder" />
+        <EntityTypeShape EntityType="VirtualShopModel.ProductOrder" Width="1.5" PointX="5.25" PointY="4.875" />
+        <EntityTypeShape EntityType="VirtualShopModel.Invoice" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="VirtualShopModel.Order" Width="1.5" PointX="3" PointY="1.875" />
+        <EntityTypeShape EntityType="VirtualShopModel.Product" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="5.25" PointY="8" />
+        <AssociationConnector Association="VirtualShopModel.FK_OrderInvoice" />
+        <AssociationConnector Association="VirtualShopModel.FK_ProductOrder_Order" />
+        <AssociationConnector Association="VirtualShopModel.FK_ProductOrder_Product" />
+        <AssociationConnector Association="VirtualShopModel.FK_Stock_Product" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace PracticaNETRoP.Models
 {
-    public class ShoppingCard : List<Products>
+    public class ShoppingCard : List<Product>
     {
     }
 }

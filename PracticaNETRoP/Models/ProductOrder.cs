@@ -12,13 +12,13 @@ namespace PracticaNETRoP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoices
+    public partial class ProductOrder
     {
-        public int Id { get; set; }
-        public int idOrder { get; set; }
-        public decimal amount { get; set; }
-        public System.DateTime creationDate { get; set; }
+        public int orderId { get; set; }
+        public int productId { get; set; }
+        public Nullable<int> units { get; set; }
     
-        public virtual Orders Orders { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
