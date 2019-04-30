@@ -60,9 +60,7 @@ namespace PracticaNETRoP.Controllers
                     productDb.Stocks.Add(stockDb);
                 }
 
-                ProductOrder productOrderDb = db.ProductOrders.Find(order.Id, productDb.Id);
-                
-                if (productOrderDb == null)
+                if (order.ProductOrders == null)
                 {
                     ProductOrder productOrder = new ProductOrder
                     {
@@ -75,7 +73,13 @@ namespace PracticaNETRoP.Controllers
                 }
                 else
                 {
-                    productOrderDb.units++;
+                    foreach (ProductOrder prodOrder in order.ProductOrders)
+                    {
+                        if (prodOrder.productId == productDb.Id)
+                        {
+                            prodOrder.units++;
+                        }
+                    }
                 }
 
                 db.Entry(productDb).State = EntityState.Modified;
