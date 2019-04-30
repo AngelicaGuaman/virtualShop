@@ -5,11 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="560f4135aebc4c58b77db1d51da4866d" Name="Diagram1">
-        <EntityTypeShape EntityType="VirtualShopModel.ProductOrder" Width="1.5" PointX="5.25" PointY="4.875" />
-        <EntityTypeShape EntityType="VirtualShopModel.Invoice" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="VirtualShopModel.ProductOrder" Width="1.5" PointX="0.5" PointY="3.875" />
+        <EntityTypeShape EntityType="VirtualShopModel.Invoice" Width="1.5" PointX="5.625" PointY="1.875" />
         <EntityTypeShape EntityType="VirtualShopModel.Order" Width="1.5" PointX="3" PointY="1.875" />
         <EntityTypeShape EntityType="VirtualShopModel.Product" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="VirtualShopModel.Stock" Width="1.5" PointX="5.625" PointY="4.875" />
         <AssociationConnector Association="VirtualShopModel.FK_OrderInvoice" />
         <AssociationConnector Association="VirtualShopModel.FK_ProductOrder_Order" />
         <AssociationConnector Association="VirtualShopModel.FK_ProductOrder_Product" />

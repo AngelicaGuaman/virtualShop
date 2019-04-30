@@ -29,6 +29,6 @@
 
 </table>
 <h1>
-    Total: @if (Model != null) { Model.Sum(i => i.price); } €
+    Total: @Model.Sum(i => i.price) €
 </h1> 
-@Html.ActionLink("Buy now", "OrderCreated")
+@Html.ActionLink("Buy now", "NewOrder")

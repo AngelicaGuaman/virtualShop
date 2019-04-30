@@ -36,7 +36,7 @@ namespace PracticaNETRoP.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult OrderCreated(ShoppingCard sc)
+        public ActionResult NewOrder(ShoppingCard sc)
         {
             Order order = new Order();
             decimal amount = 0;
@@ -61,7 +61,7 @@ namespace PracticaNETRoP.Controllers
                 }
 
                 ProductOrder productOrderDb = db.ProductOrders.Find(order.Id, productDb.Id);
-
+                order.ProductOrders.
                 if (productOrderDb == null)
                 {
                     ProductOrder productOrder = new ProductOrder
@@ -97,6 +97,11 @@ namespace PracticaNETRoP.Controllers
             sc.Clear();
 
             return RedirectToAction("OrderCreated");
+        }
+
+        public ActionResult OrderCreated()
+        {
+            return View();
         }
     }
 }
