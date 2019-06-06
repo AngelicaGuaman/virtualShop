@@ -255,6 +255,7 @@
     <Content Include="Content\img\background.png" />
     <Content Include="Content\img\eyeShadowPrimer.jpg" />
     <Content Include="Content\img\Hi-Fi-Gloss.jpg" />
+    <Content Include="Content\img\logoupm.png" />
     <Content Include="Content\img\nakedCherry.jpg" />
     <Content Include="Content\img\noProduct.jpg" />
     <Content Include="Content\img\ruborUrbanDecay.jpg" />

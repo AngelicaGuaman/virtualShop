@@ -18,7 +18,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Angels cosmetics", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div>
+                    <img src="~/Content/img/logoupm.png" class="navbar-left" with="40px" height="40px" alt="Image" />
+                    @Html.ActionLink("Angels cosmetics", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -28,11 +32,14 @@
                     {
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Product")</li>
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
-                            @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
                             @{ PracticaNETRoP.Models.ShoppingCard shoppingCard = (PracticaNETRoP.Models.ShoppingCard)HttpContext.Current.Session["KEY"];}
                             @if (shoppingCard != null)
                             {
-                                <span class="shopping-card-size">(@shoppingCard.Count())</span>
+                                @Html.ActionLink("Ver carrito (" + @shoppingCard.Count()+")", "Index", "ShoppingCard")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
                             }
                         </li>
                     }
