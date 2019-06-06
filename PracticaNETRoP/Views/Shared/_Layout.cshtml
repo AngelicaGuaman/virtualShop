@@ -23,15 +23,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Product")</li>
-                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
-                        @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
-                        @{ PracticaNETRoP.Models.ShoppingCard shoppingCard = (PracticaNETRoP.Models.ShoppingCard)HttpContext.Current.Session["KEY"];}
-                        @if (shoppingCard != null)
-                        {
-                            <span class="shopping-card-size">(@shoppingCard.Count())</span>
-                        }
-                    </li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Product")</li>
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
+                            @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
+                            @{ PracticaNETRoP.Models.ShoppingCard shoppingCard = (PracticaNETRoP.Models.ShoppingCard)HttpContext.Current.Session["KEY"];}
+                            @if (shoppingCard != null)
+                            {
+                                <span class="shopping-card-size">(@shoppingCard.Count())</span>
+                            }
+                        </li>
+                    }
+
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
