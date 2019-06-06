@@ -55,8 +55,7 @@ namespace PracticaNETRoP.Controllers
                         units = productDb.stock
                     };
 
-                    // TODO ver el tipo de datos de la imagen
-                    productDb.image = "../../img/noProduct.jpg";
+                    //productDb.image = "~/Content/img/noProduct.jpg";
                     productDb.Stocks.Add(stockDb);
                 }
 
@@ -64,8 +63,8 @@ namespace PracticaNETRoP.Controllers
                 {
                     ProductOrder productOrder = new ProductOrder
                     {
-                        orderId = order.Id,
-                        productId = productDb.Id,
+                        Order = order,
+                        Product = product,
                         units = 1
                     };
 
@@ -80,6 +79,8 @@ namespace PracticaNETRoP.Controllers
                             prodOrder.units++;
                         }
                     }
+
+                    db.Entry(order).State = EntityState.Modified;
                 }
 
                 db.Entry(productDb).State = EntityState.Modified;

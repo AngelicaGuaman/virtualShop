@@ -35,8 +35,16 @@
         {
             <tr>
                 <td>
-                    <img src=@("../../" + item.image) alt="Image" />
-                    @Html.DisplayFor(modelItem => item.image)
+                    @{
+                        if (item.stock == 0)
+                        {
+                            <img src="~/Content/img/noProduct.jpg" with="40px" height="100px" alt="Image" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/img/@(item.image).jpg" with="40px" height="100px" alt="Image" />
+                        }
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.name)
