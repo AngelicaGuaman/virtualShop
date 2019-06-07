@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PracticaNETRoP.Models.Product>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<PracticaNETRoP.Models.Product>
 
 @{
     ViewBag.Title = "Index";
@@ -6,9 +7,13 @@
 
 <h2>Productos</h2>
 
-<p>
-    @Html.ActionLink("Create article", "Create")
-</p>
+@if (User.Identity.GetUserName().Equals("admin@upm.es"))
+{
+    <p>
+        @Html.ActionLink("Crear artículo", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -59,9 +64,13 @@
                     @Html.DisplayFor(modelItem => item.stock)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detalle", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Borrar", "Delete", new { id = item.Id }) |
+
+                    @if (User.Identity.GetUserName().Equals("admin@upm.es"))
+                    {
+                        @Html.ActionLink("Editar | ", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Detalle | ", "Details", new { id = item.Id })
+                        @Html.ActionLink("Borrar | ", "Delete", new { id = item.Id })
+                    }
 
                     @if (item.stock > 0)
                     {

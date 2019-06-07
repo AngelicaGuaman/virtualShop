@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Angels cosmetics ASP.NET</title>
@@ -22,7 +23,7 @@
                     <img src="~/Content/img/logoupm.png" class="navbar-left" with="40px" height="40px" alt="Image" />
                     @Html.ActionLink("Angels cosmetics", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
-                
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -31,17 +32,22 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "Product" ? "active" : "")">@Html.ActionLink("Ver productos", "Index", "Product")</li>
-                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
-                            @{ PracticaNETRoP.Models.ShoppingCard shoppingCard = (PracticaNETRoP.Models.ShoppingCard)HttpContext.Current.Session["KEY"];}
-                            @if (shoppingCard != null)
-                            {
-                                @Html.ActionLink("Ver carrito (" + @shoppingCard.Count()+")", "Index", "ShoppingCard")
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
-                            }
-                        </li>
+
+                        if (!User.Identity.GetUserName().Equals("admin@upm.es"))
+                        {
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" && ViewContext.RouteData.Values["Controller"].ToString() == "ShoppingCard" ? "active" : "")">
+                                @{ PracticaNETRoP.Models.ShoppingCard shoppingCard = (PracticaNETRoP.Models.ShoppingCard)HttpContext.Current.Session["KEY"];}
+                                @if (shoppingCard != null)
+                                {
+                                    @Html.ActionLink("Ver carrito (" + @shoppingCard.Count() + ")", "Index", "ShoppingCard")
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Ver carrito", "Index", "ShoppingCard")
+                                }
+                            </li>
+                        }
+
                     }
 
                     <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active" : "")">@Html.ActionLink("Acerca de", "About", "Home")</li>
