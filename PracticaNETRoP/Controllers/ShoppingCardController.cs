@@ -47,7 +47,7 @@ namespace PracticaNETRoP.Controllers
                 amount = amount + productDb.price;
                 productDb.stock--;
 
-                if (productDb.stock <= PRODUCT_WITHOUT_STOCK)
+                if (productDb.stock < PRODUCT_WITHOUT_STOCK)
                 {
                     Stock stockDb = new Stock
                     {

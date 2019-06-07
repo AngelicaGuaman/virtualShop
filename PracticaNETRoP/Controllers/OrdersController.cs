@@ -12,19 +12,19 @@ using PracticaNETRoP.Models;
 
 namespace PracticaNETRoP.Controllers
 {
-    public class OrderController : ApiController
+    public class OrdersController : ApiController
     {
         private VirtualShopEntities db = new VirtualShopEntities();
 
         // GET: api/Orders
-        public List<Order> GetOrders()
+        public IQueryable<Order> GetOrders()
         {
-            return db.Orders.ToList();
+            return db.Orders;
         }
 
         // GET: api/Orders/5
         [ResponseType(typeof(Order))]
-        public IHttpActionResult GetOrders(int id)
+        public IHttpActionResult GetOrder(int id)
         {
             Order order = db.Orders.Find(id);
             if (order == null)
@@ -37,7 +37,7 @@ namespace PracticaNETRoP.Controllers
 
         // PUT: api/Orders/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutOrders(int id, Order order)
+        public IHttpActionResult PutOrder(int id, Order order)
         {
             if (!ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace PracticaNETRoP.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrdersExists(id))
+                if (!OrderExists(id))
                 {
                     return NotFound();
                 }
@@ -72,7 +72,7 @@ namespace PracticaNETRoP.Controllers
 
         // POST: api/Orders
         [ResponseType(typeof(Order))]
-        public IHttpActionResult PostOrders(Order order)
+        public IHttpActionResult PostOrder(Order order)
         {
             if (!ModelState.IsValid)
             {
@@ -80,29 +80,14 @@ namespace PracticaNETRoP.Controllers
             }
 
             db.Orders.Add(order);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (OrdersExists(order.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
         }
 
         // DELETE: api/Orders/5
         [ResponseType(typeof(Order))]
-        public IHttpActionResult DeleteOrders(int id)
+        public IHttpActionResult DeleteOrder(int id)
         {
             Order order = db.Orders.Find(id);
             if (order == null)
@@ -125,7 +110,7 @@ namespace PracticaNETRoP.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OrdersExists(int id)
+        private bool OrderExists(int id)
         {
             return db.Orders.Count(e => e.Id == id) > 0;
         }
