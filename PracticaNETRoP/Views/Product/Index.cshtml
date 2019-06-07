@@ -71,14 +71,16 @@
                         @Html.ActionLink("Detalle | ", "Details", new { id = item.Id })
                         @Html.ActionLink("Borrar | ", "Delete", new { id = item.Id })
                     }
-
-                    @if (item.stock > 0)
-                    {
-                        @Html.ActionLink("Añadir al carrito", "Add", new { id = item.Id })
-                    }
                     else
                     {
-                        <p>No hay stock</p>
+                        if (item.stock > 0)
+                        {
+                            @Html.ActionLink("Añadir al carrito", "Add", new { id = item.Id })
+                        }
+                        else
+                        {
+                            <p>No hay stock</p>
+                        }
                     }
 
                 </td>
